@@ -1,0 +1,32 @@
+{
+  "name": "@isnifer/npm-time",
+  "version": "1.0.0",
+  "description": "Awesome addition to npm time %PACKAGE_NAME% time command",
+  "bin": {
+    "npm-time": "cli.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/automate-routine/npm-time.git"
+  },
+  "keywords": [
+    "npm",
+    "time",
+    "package"
+  ],
+  "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/automate-routine/npm-time/issues"
+  },
+  "homepage": "https://github.com/automate-routine/npm-time#readme",
+  "dependencies": {
+    "date-fns": "^1.28.5",
+    "lodash.findlastindex": "^4.6.0",
+    "lodash.mapvalues": "^4.6.0"
+  }
+}
