@@ -1,6 +1,6 @@
 # npm-time
 
-## Installation as global module
+## Installation as a global module
 ```sh
 $ npm i @isnifer/npm-time -g
 ```
@@ -17,7 +17,7 @@ $ npm-time webpack 08.11.2017 08.20.2017
 npm-time %PACKAGE_NAME% [dateStart] [dateEnd]
 ```
 
-## Installation as local dependency (npm@5)
+## Installation as a local dependency (npm@5)
 ```sh
 $ npm i @isnifer/npm-time
 $ npx npm-time webpack 08.11.2017 08.20.2017
@@ -25,7 +25,7 @@ $ npx npm-time webpack 08.11.2017 08.20.2017
 3.5.5 => 16.08.2017
 ```
 
-## As module
+## As a module
 ```js
 import npmTime from '@isnifer/npm-time'
 
