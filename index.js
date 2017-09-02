@@ -27,8 +27,7 @@ function parseJSObjectInString(string) {
   }
 }
 
-module.exports = async function npmTime() {
-  let [moduleName, originalDateStart, originalDateEnd] = process.argv.slice(2)
+module.exports = async function npmTime(moduleName, originalDateStart, originalDateEnd) {
   const { array: versions } = await getVersions(moduleName)
 
   if (originalDateStart) {

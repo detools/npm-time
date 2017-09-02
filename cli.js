@@ -1,4 +1,6 @@
 #!/usr/bin/env node
 const npmTime = require('./')
 
-npmTime()
+const [moduleName, originalDateStart, originalDateEnd] = process.argv.slice(2)
+
+npmTime(moduleName, originalDateStart, originalDateEnd)
