@@ -4,8 +4,6 @@ const isAfter = require('date-fns/is_after')
 const isBefore = require('date-fns/is_before')
 const isEqual = require('date-fns/is_equal')
 const isWithinRange = require('date-fns/is_within_range')
-const mapValues = require('lodash.mapvalues')
-const findLastIndex = require('lodash.findlastindex')
 
 const getVersions = packageName => new Promise(
   (resolve, reject) => exec(`npm view ${packageName} time`, (error, result) => (
