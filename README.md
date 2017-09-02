@@ -13,7 +13,9 @@ $ npm-time webpack 08.11.2017 08.20.2017
 ```
 
 ## CLI API
-`npm-time %PACKAGE_NAME% [dateStart] [dateEnd]`
+```sh
+npm-time %PACKAGE_NAME% [dateStart] [dateEnd]
+```
 
 ## Installation as local dependency (npm@5)
 ```sh
