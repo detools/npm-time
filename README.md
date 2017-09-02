@@ -29,5 +29,9 @@ $ npx npm-time webpack 08.11.2017 08.20.2017
 ```js
 import npmTime from '@isnifer/npm-time'
 
-npmTime(moduleName: string, dateStart?: string, dateEnd?: string)
+async getVersions() {
+  await npmTime(moduleName: string, dateStart?: string, dateEnd?: string)
+}
+
+getVersions()
 ```
