@@ -1,5 +1,9 @@
 const { exec } = require('child_process')
 const format = require('date-fns/format')
+const isAfter = require('date-fns/is_after')
+const isBefore = require('date-fns/is_before')
+const isEqual = require('date-fns/is_equal')
+const isWithinRange = require('date-fns/is_within_range')
 const mapValues = require('lodash.mapvalues')
 const findLastIndex = require('lodash.findlastindex')
 
@@ -27,30 +31,20 @@ function parseJSObjectInString(string) {
   }
 }
 
-module.exports = async function npmTime(moduleName, originalDateStart, originalDateEnd) {
+const logDates = ([version, date]) => console.log(`${version} => ${format(date, 'DD.MM.YYYY')}`)
+
+module.exports = async function npmTime(moduleName, dateStart, dateEnd) {
+  const getBetween = ([, date]) => isWithinRange(date, dateStart, dateEnd)
+  const getAfter = ([, date]) => isAfter(date, dateStart) || isEqual(date, dateStart)
+  const getBefore = ([, date]) => isBefore(date, dateStart) || isEqual(date, dateStart)
+
   const { array: versions } = await getVersions(moduleName)
+  const [, actualFilter] = [
+    [!!(dateStart && dateEnd), getBetween],
+    [!!(dateStart && !dateEnd), getAfter],
+    [!!(!dateStart && dateEnd), getBefore],
+    [!!(!dateStart && !dateEnd), x => x],
+  ].find(([status]) => status)
 
-  if (originalDateStart) {
-    const dateStart = format(originalDateStart, 'YYYYMMDD')
-
-    const left = versions.findIndex(([, date]) => (format(date, 'YYYYMMDD') - dateStart) >= 0)
-
-    return versions.slice(left).forEach(([version, date]) => (
-      console.log(`${version} => ${format(date, 'DD.MM.YYYY')}`)
-    ))
-  }
-
-  if (originalDateStart && originalDateEnd) {
-    const dateStart = format(originalDateStart, 'YYYYMMDD')
-    const dateEnd = format(originalDateEnd, 'YYYYMMDD')
-
-    const left = versions.findIndex(([, date]) => (format(date, 'YYYYMMDD') - dateStart) >= 0)
-    const right = findLastIndex(versions, ([, date]) => (dateEnd - format(date, 'YYYYMMDD')) >= 0)
-
-    return versions.slice(left, right + 1).forEach(([version, date]) => (
-      console.log(`${version} => ${format(date, 'DD.MM.YYYY')}`)
-    ))
-  }
-
-  console.log(versions)
+  return versions.filter(actualFilter).forEach(logDates)
 }
